@@ -14,8 +14,8 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
-  String email;
-  String password;
+  String _email;
+  String _password;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
               onChanged: (value) {
-                email = value;
+                _email = value;
               },
               decoration: kTextFieldInputDecoration.copyWith(
                   hintText: 'Enter your email'),
@@ -53,7 +53,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               textAlign: TextAlign.center,
               obscureText: true,
               onChanged: (value) {
-                password = value;
+                _password = value;
               },
               decoration: kTextFieldInputDecoration.copyWith(
                   hintText: 'Enter your password'),
@@ -67,8 +67,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               onPressed: () async {
                 try {
                   final newUser = await _auth.createUserWithEmailAndPassword(
-                    email: email,
-                    password: password,
+                    email: _email,
+                    password: _password,
                   );
                   if (newUser != null) {
                     Navigator.pushNamed(context, ChatScreen.route);
